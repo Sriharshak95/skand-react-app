@@ -14,7 +14,7 @@
             - run: aws s3 sync build/ s3://skand-user-app --delete
             
       workflows:
-        version: 2.1
+        version: 2
         execute_bulk:
           jobs:
             - build_deploy 
