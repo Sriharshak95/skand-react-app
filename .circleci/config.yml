@@ -1,7 +1,20 @@
-version: 2.1
-orbs:
-  node: circleci/node@3.0.0
+jobs:
+  build_deploy:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - checkout
+      - run:
+          name: Installing AWS CLI
+          command: |
+            sudo apt-get update
+            sudo apt install python3-pip
+            sudo pip3 install awsebcli --upgrade
+      - run: cd ./app && npm install && npm run build
+      - run: aws s3 sync ./app/build s3://skand-user-app --delete
+      
 workflows:
-  node-tests:
+  version: 2
+  execute_bulk:
     jobs:
-      - node/test
+      - build_deploy 
