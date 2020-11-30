@@ -42,7 +42,7 @@ function CreateUser() {
                                 <div>
                                     <div className="d-flex align-items-center mb-2">
                                         <Card.Title className="mr-auto mb-0">Create User</Card.Title>
-                                        <CloseButton onClick={goBack}><img style={{width:20}} src={Close}/></CloseButton>
+                                        <CloseButton onClick={goBack}><img style={{width:20}} alt="default" src={Close}/></CloseButton>
                                     </div>
                                     <Formik
                                         initialValues={{

@@ -10,9 +10,9 @@ import { StyledButton } from './allstyles';
 
 function ListUser() {
     const [isLoaded, setLoaded] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [setCurrentPage] = useState(1);
     const [startIndex, setStartIndex] = useState(0);
-    const [postPerPage, setPostPerPage] = useState(4);
+    const [postPerPage] = useState(4);
     const users = useSelector(state => state.users);
     const [emailFilter, SetEmailFilter] = useState("");
     const [activeFilter, SetActiveFilter] = useState("");
@@ -37,7 +37,7 @@ function ListUser() {
             .catch((error) => {
                 console.error('Error:', error);
             });
-    }, [dispatch]);
+    }, [dispatch,postPerPage,startIndex]);
 
     //filter table function for active and email columns
     const filterTable = (filter) => {

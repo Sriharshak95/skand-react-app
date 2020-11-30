@@ -83,7 +83,7 @@ function UserDetail() {
                                 <div>
                                 <div className="d-flex align-items-center mb-2">
                                     <Card.Title className="mr-auto mb-0">Edit User Details</Card.Title>
-                                    <CloseButton onClick={goBack}><img style={{width:20}} src={Close}/></CloseButton>
+                                    <CloseButton onClick={goBack}><img style={{width:20}} alt="close" src={Close}/></CloseButton>
                                 </div>
                                     <Formik
                                         enableReinitialize={true}

@@ -8,8 +8,7 @@ import UserDetail from './userdetail';
 import CreateUser from './createuser';
 import PrivateRoute from './privateroute';
 import { authUser } from './reduximp/action';
-import { useSelector, useDispatch, Provider } from 'react-redux';
-import store from './store';
+import { useSelector, useDispatch } from 'react-redux';
 import cookie from './cookie';
 
 function App() {
@@ -24,18 +23,16 @@ function App() {
     }
   }, [dispatch]);
   return (
-    <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            {authtoken ? <Redirect to="/home" /> : <Login />}
-          </Route>
-          <PrivateRoute exact path="/user/:id" component={UserDetail} auth={authtoken} />
-          <PrivateRoute exact path="/createuser" component={CreateUser} auth={authtoken} />
-          <PrivateRoute exact path="/home" component={ListUser} auth={authtoken} />
-        </Switch>
-      </Router>
-    </Provider >
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          {authtoken ? <Redirect to="/home" /> : <Login />}
+        </Route>
+        <PrivateRoute exact path="/user/:id" component={UserDetail} auth={authtoken} />
+        <PrivateRoute exact path="/createuser" component={CreateUser} auth={authtoken} />
+        <PrivateRoute exact path="/home" component={ListUser} auth={authtoken} />
+      </Switch>
+    </Router>
   );
 }
 
