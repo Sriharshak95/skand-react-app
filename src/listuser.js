@@ -89,22 +89,25 @@ function ListUser() {
         }
     }
 
-    //delete user api
-    const deleteUser = (id) => {
-        fetch('/api/v2/users/' + id, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': '123abc456def789ghi'
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-            })
-            .catch((error) => {
-                console.error('Error:', error);
+    //delete user
+    const deleteUser = async(id) => {
+        try{
+            const response = await fetch('/api/v2/users/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': cookie.get('authorization')
+                }
             });
+
+            const data = await response.json()
+            if(data){
+                const filteredItems = tempUser.filter(item=>item.id!==id);
+                dispatch(setTempUser(filteredItems));
+            }
+        }catch(e){
+            console.log(e);
+        }
     }
 
     //get Current posts
