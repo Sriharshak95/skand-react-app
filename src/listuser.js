@@ -14,7 +14,7 @@ function ListUser() {
     const [isLoaded, setLoaded] = useState(false);
     const [,setCurrentPage] = useState(1);
     const [startIndex, setStartIndex] = useState(0);
-    const [postPerPage] = useState(4);
+    const [,postPerPage] = useState(4);
     const users = useSelector(state => state.users);
     const [emailFilter, SetEmailFilter] = useState("");
     const [activeFilter, SetActiveFilter] = useState("");
