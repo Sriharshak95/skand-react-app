@@ -1,11 +1,11 @@
 import React from 'react';
 import { Navbar,Nav} from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { authUser } from './reduximp/action';
+import { authUser } from '../redux-store/action';
 import { Link} from 'react-router-dom';
-import './App.css';
-import {LogOut} from './allstyles';
-import cookie from './cookie';
+import '../App.css';
+import {LogOut} from '../helpers/allstyles';
+import cookie from '../helpers/cookie';
 
 function TopNav() {
     const dispatch = useDispatch();

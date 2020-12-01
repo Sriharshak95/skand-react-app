@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { storeData } from './reduximp/action';
+import { storeData } from './redux-store/action';
 import { useHistory } from 'react-router-dom';
 import './App.css';
-import TopNav from './topnav';
-import Page from './page';
-import { StyledButton } from './allstyles';
+import TopNav from './components/topnav';
+import Page from './components/page';
+import { StyledButton } from './helpers/allstyles';
+import cookie from './helpers/cookie';
 
+//list all users
 function ListUser() {
     const [isLoaded, setLoaded] = useState(false);
-    const [setCurrentPage] = useState(1);
+    const [,setCurrentPage] = useState(1);
     const [startIndex, setStartIndex] = useState(0);
     const [postPerPage] = useState(4);
     const users = useSelector(state => state.users);
@@ -21,22 +23,28 @@ function ListUser() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetch('/api/v2/users', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': '123abc456def789ghi'
+        async function listUser(){
+            try{
+                const response = await fetch('/api/v2/users', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': cookie.get('authorization')
+                    }
+                });
+                const data = await response.json();
+                if(data){
+                    setLoaded(true);
+                    dispatch(storeData(data.users));
+                    let paginateData = data.users.slice(startIndex, postPerPage);
+                    setTempUser(paginateData);
+                }
+            }catch(e){
+                console.log(e);
             }
-        })
-            .then(response => response.json())
-            .then(data => {
-                setLoaded(true);
-                dispatch(storeData(data.users));
-                let paginateData = data.users.slice(startIndex, postPerPage);
-                setTempUser(paginateData);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        }
+
+        listUser();
+
     }, [dispatch,postPerPage,startIndex]);
 
     //filter table function for active and email columns
@@ -108,9 +116,6 @@ function ListUser() {
         if(users.length>0){
             let startNumber = (pageNumber - 1) * postPerPage;
             let endNumber = Math.min(startNumber + postPerPage - 1, users.length - 1);
-            console.log("start"+startNumber);
-            console.log("end"+endNumber);
-            console.log("page"+pageNumber);
             let paginateUserData = users.slice(startNumber,endNumber+1);
             setTempUser(paginateUserData);
             setCurrentPage(pageNumber)

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {Toast} from 'react-bootstrap';
 
 const StyledButton = styled.button `
 background-color:${props=>props.bg || '#fcfcfc'};
@@ -31,4 +32,8 @@ const CloseButton = styled.button `
 background:transparent;
 border:0;`;
 
-export {StyledButton, Error, SubmitButton,LogOut, CloseButton};
+const StyledToast = styled(Toast) `
+border-left: 4px solid #34982e;
+`;
+
+export {StyledButton, Error, SubmitButton,LogOut, CloseButton, StyledToast};

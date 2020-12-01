@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form, Field} from 'formik';
-import './App.css';
-import {Error} from './allstyles';
+import '../App.css';
+import {Error} from '../helpers/allstyles';
 
 function SkandForm({errors,touched,isSubmitting}){
     return(

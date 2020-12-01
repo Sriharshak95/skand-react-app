@@ -6,10 +6,10 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import ListUser from './listuser';
 import UserDetail from './userdetail';
 import CreateUser from './createuser';
-import PrivateRoute from './privateroute';
-import { authUser } from './reduximp/action';
+import PrivateRoute from './helpers/privateroute';
+import { authUser } from './redux-store/action';
 import { useSelector, useDispatch } from 'react-redux';
-import cookie from './cookie';
+import cookie from './helpers/cookie';
 
 function App() {
   const authtoken = useSelector(state => state.auth);

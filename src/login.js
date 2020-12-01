@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { Spinner, Alert } from 'react-bootstrap';
-import { LoginSchema } from './validationSchema';
+import { LoginSchema } from './helpers/validationSchema';
 import './App.css';
-import { Error } from './allstyles';
-import { SubmitButton } from './allstyles';
-import cookie from './cookie';
-import { authUser } from './reduximp/action';
+import { Error } from './helpers/allstyles';
+import { SubmitButton } from './helpers/allstyles';
+import cookie from './helpers/cookie';
+import { authUser } from './redux-store/action';
 import { useDispatch } from 'react-redux';
 
 function Login() {
